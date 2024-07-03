@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Technician Reccomendation System</title>
+<style>
+body 
+{
+background-color:lightpink;
+background-size:color;
+height:100vh;
+}
+#abcdw 
+{
+display:flex;
+justify-content:center;
+align-items:center;
+color :white;
+font-family:"Roboto";
+}
+#abcd 
+{
+text-align:center; 
+
+}
+#fgh 
+{
+text-align:center;
+margin:15px;
+}
+button 
+{
+width:120px;
+height:30px;
+border-radius:10px;
+background-color:lightgreen;
+padding:0px;
+border-width:0px;
+color:white;
+}
+#getloc 
+{
+width:120px;
+height:30px;
+border-radius:10px;
+background-color:lightgreen;
+padding:0px;
+border-width:0px;
+color:white;
+
+}
+#iopp 
+{
+    color: white;
+    padding: 5px;
+    border-color: white;
+    border-width: 4px;
+    border-radius: 4px;
+    border-style: solid;
+    width: 700px;
+    background-color:skyblue;
+    margin:20px;
+    text-align:center;
+
+}
+
+#techdisplay
+{
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+}
+#yuu 
+{
+color:white;
+font-family:"Roboto";
+}
+</style>
+ 
+</head>
+<body>
+<div class="abcdw">
+  <h1><center>Technician Recommendation System</center></h1>
+</div>
+  <form action="/ft/" method="post" id="fgh">
+   {% 	csrf_token %}
+   <input type="text" name="lat" id="lat" >
+   <input type="text" name="lon" id="lon" >
+   <h1 id="yuu">Choose Field</h1>
+   <select id="fields" name="fields">
+    <option value="ejk">Choose Field</option>
+    <option value="Electrician">Electrician</option>
+    <option value="AC Repair technician">AC Repair technician</option>
+    <option value="Carpenter">Carpenter</option>
+    <option value="Automotive technician">Automotive technician</option>
+    <option value="Plumber">Plumber</option>
+    <option value="Locksmith">Locksmith</option>
+    <option value="GlassInstaller">GlassInstaller</option>
+    <option value="Washingmachine repair technician">Washingmachine repair technician</option>
+    <option value="Painter">Painter</option>
+    <option value="Door technician">Door technician</option>
+    <option value="Mobile technician">Mobile technician</option>
+  </select>
+  <input type="submit" value="Find Technician" id="getloc">
+  </form>
+<div id="abcd">
+  <button id="getLocation" type>Get Location</button>
+</div>
+<div id="abcde">
+<div id="techdisplay"> </div>
+</div>
+
+  <script>
+    // Select the button and paragraph elements
+    var button = document.getElementById('getLocation');
+    var locationParagraph = document.getElementById('location');
+
+    // Add an event listener to the button
+    button.addEventListener('click', function() {
+      // Check if the Geolocation API is supported
+      if (navigator.geolocation) {
+        // Call the getCurrentPosition function
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+        // If the Geolocation API is not supported, display an error message
+        locationParagraph.textContent = 'Geolocation is not supported by this browser.';
+      }
+    });
+
+    // Define the showPosition function
+    function showPosition(position) {
+      // Get the latitude and longitude values from the position object
+      var lat = position.coords.latitude;
+      var lon = position.coords.longitude;
+
+      // Display the latitude and longitude values in the paragraph element
+      document.getElementById("lat").value=lat;
+      document.getElementById("lon").value=lon;
+    }
+let results=document.getElementById("techdisplay");
+d={{d|safe}};
+    for(i=0;i<d.length;i++)
+    { 
+	let yy=document.createElement("div");
+	yy.id="iopp";
+	let hh=document.createElement("h1");
+	let ha=document.createElement("h1");
+	let hb=document.createElement("h1");
+	let hc=document.createElement("h1");
+	let hd=document.createElement("h1");
+	let he=document.createElement("h1");
+	let hf=document.createElement("h1");
+	let hg=document.createElement("h1");
+	hh.textContent="Technician Name : "+d[i][0];
+	ha.textContent="Technician Field : "+d[i][1];
+	hb.textContent="Technician Location : "+d[i][2];
+	hc.textContent="Latitude : " +d[i][3];
+	hd.textContent="Longitude : "+d[i][4];
+	he.textContent="Distance : " + d[i][5]+"Km";
+	hf.textContent="Contact Number : "+d[i][6];
+	hg.textContent="Skill Rating : " +d[i][7];
+	yy.appendChild(hh);
+	yy.appendChild(ha);
+	yy.appendChild(hb);
+	yy.appendChild(hc);
+	yy.appendChild(hd);
+	yy.appendChild(he);
+	yy.appendChild(hf);
+	yy.appendChild(hg);
+	results.appendChild(yy);	
+    }
+  </script>
+</body>
+</html>
